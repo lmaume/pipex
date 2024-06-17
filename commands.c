@@ -6,7 +6,7 @@
 /*   By: lmaume <lmaume@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 16:51:45 by lmaume            #+#    #+#             */
-/*   Updated: 2024/06/14 19:09:18 by lmaume           ###   ########.fr       */
+/*   Updated: 2024/06/17 11:46:12 by lmaume           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,16 +37,16 @@ char	*get_command(char **paths, char *cmd)
 
 void	execute_command(t_pipex pipex, char **argv, char **env)
 {
-	pipex.the_args = ft_split(argv[pipex.index], ' ');
-	pipex.cmd = get_command(pipex.splitted_paths, pipex.the_args[0]);
+	pipex.args = ft_split(argv[pipex.index], ' ');
+	pipex.cmd = get_command(pipex.splitted_paths, pipex.args[0]);
 	if (pipex.cmd == NULL)
 	{
 		error("command not found : ", 2);
-		error(pipex.the_args[0], 2);
+		error(pipex.args[0], 2);
 		error("\n", 2);
 		free_child(pipex);
 	}
-	else if (execve(pipex.cmd, pipex.the_args, env) == -1)
+	else if (execve(pipex.cmd, pipex.args, env) == -1)
 		perror("execve error.");
 }
 

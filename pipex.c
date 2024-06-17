@@ -6,7 +6,7 @@
 /*   By: lmaume <lmaume@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 16:50:55 by lmaume            #+#    #+#             */
-/*   Updated: 2024/06/14 19:09:30 by lmaume           ###   ########.fr       */
+/*   Updated: 2024/06/17 11:46:32 by lmaume           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,13 @@ void	free_child(t_pipex p)
 	int	i;
 
 	i = 0;
-	while (p.the_args[i])
+	while (p.args[i])
 	{
-		if (p.the_args[i])
-			free(p.the_args[i]);
+		if (p.args[i])
+			free(p.args[i]);
 		i++;
 	}
-	free(p.the_args);
+	free(p.args);
 }
 
 int	child(t_pipex p, int argc)
@@ -103,7 +103,7 @@ int	main(int argc, char **argv, char **env)
 	i = 0;
 	p.cmd = NULL;
 	if (argc < 5)
-		return (error(NOT_ENOUGH_ARGC, STD_OUT), 1);
+		return (error(NOT_ENOUGH_ARGC, ERR_OUT), 1);
 	p.infile = open(argv[1], O_RDONLY);
 	if (p.infile < 0)
 		return (error(ERR_INFILE, ERR_OUT), 1);

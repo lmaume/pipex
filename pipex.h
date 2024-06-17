@@ -6,22 +6,22 @@
 /*   By: lmaume <lmaume@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 16:52:17 by lmaume            #+#    #+#             */
-/*   Updated: 2024/06/14 19:42:35 by lmaume           ###   ########.fr       */
+/*   Updated: 2024/06/17 11:46:01 by lmaume           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PIPEX_H
 # define PIPEX_H
 
-# include <unistd.h>
+# include "printf/libft/libft.h"
 # include <sys/types.h>
 # include <sys/wait.h>
 # include <sys/uio.h>
+# include <unistd.h>
 # include <stdlib.h>
 # include <string.h>
 # include <fcntl.h>
 # include <stdio.h>
-# include "printf/libft/libft.h"
 
 # define ERR_PIPE "Pipe error.\n"
 # define ERR_INFILE "Infile error.\n"
@@ -37,7 +37,7 @@ enum e_enum
 typedef struct s_pipex
 {
 	char	**splitted_paths;
-	char	**the_args;
+	char	**args;
 	char	*paths_line;
 	char	*cmd;
 	int		tube[2];
@@ -48,10 +48,8 @@ typedef struct s_pipex
 }				t_pipex;
 
 void	execute_command(t_pipex pipex, char **argv, char **env);
-
 void	fork_free(t_pipex p);
 void	free_child(t_pipex p);
-
 void	error(char *error_message, int fd);
 
 #endif
